@@ -17,4 +17,5 @@ def homePageView(request):
     This page was generated at %s. 
     </html>
     ''' % time.ctime()
+    
     return HttpResponse(response_html)
