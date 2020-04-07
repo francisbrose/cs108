@@ -35,7 +35,6 @@ class RandomQuotePageView(DetailView):
 
 class PersonPageView(DetailView):
     '''Shows all quotes and images for one person'''
-
     model = Person
     template_name = 'quotes/person.html'
     context_object_name = 'person'
@@ -50,3 +49,4 @@ class UpdateQuoteView(UpdateView):
     form_class = UpdateQuoteForm
     template_name = "quotes/update_quote.html"
     queryset = Quote.objects.all()
+

@@ -23,9 +23,6 @@ class Person(models.Model):
         quotes = Quote.objects.filter(person=self.pk)
         return quotes    
 
-
-
-
 class Quote(models.Model):
     '''Encapsulaye the idea of a quote'''
     #data attributes of a quote
@@ -45,8 +42,35 @@ class Image(models.Model):
     '''Represent an image associated with a person.'''
     image_url = models.URLField(blank=True)
     person = models.ForeignKey('Person', on_delete=models.CASCADE)
-
     def __str__(self):
         '''Return a string representation of this image.'''
         return self.image_url
 
+
+class Profile(models.Model):
+    '''Models the data attributes of Facebook users'''
+    name=models.TextField(blank=False)
+    def f_name(self):
+        '''Returns first name'''
+        return self.f_name
+
+    def l_name(self):
+        '''Returns last name'''
+        return self.l_name
+
+    def city(self):
+        '''Returns person's city'''
+        return self.city
+
+    def email(self):
+        '''Returns person's email'''
+        return self.email
+
+    def image(self):
+        '''Returns image of person'''
+        image = Image.objects.filter(person=self.pk)
+        return image
+        
+    def __str__(self):
+        '''Return a string representation of this profile.'''
+        return self.Profile

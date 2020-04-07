@@ -1,0 +1,339 @@
+
+Use the Django admin to create 3-5 sample profiles, with names/data of your choosing.
+
+In the views.py file, create a class-based view called ShowAllProfilesView, which inherits from the generic
+ListView. Use this to obtain data for all Profile records, and to deleguate work to a template called 
+show_all_profiles.html to display all Profiles.
+
+Create a templates directory, and create the template file show_all_profiles.html, to render a table with all
+Profile records, one per line. Include the first name, last name, city, and a profile image, using the 
+data attributes stored in the Profile model.
+
+Edit your main project’s urls.py, to create a link on the URL pattern '/mini_fb/ to route requests to the
+mini_fb project’s urls.py file. Create the urls.py file inside the mini_fb project, which will create a 
+URL mapping from the default URL ('') to the ShowAllProfilesView. Name this URL show_all_profiles.
+
+Test application! Try this URL: 'http://127.0.0.1:8000/mini_fb/. You should be able to see a 
+page with all profiles, displaying in a table. Resolve errors.
+
+
+______________________________________________________________________________________________________
+
+
+
+
+Edit views.py file. Create a class-based view called ShowProfilePageView, which inherits from the generic
+DetailView class. Use this to obtain data for one Profile record, and to deleguate work to a template 
+called show_profile_page.html to display that Profile.
+
+Create template file show_profile_page.html to render a profile page for one user (a single Profile). 
+On this page, include a larger-format image, and decide on the formatting that suits you 
+to display the data attributes stored in the Profile record.
+
+Edit mini_fb project’s urls.py file. Create a URL mapping to route requests from the URL pattern 
+'profile/<int:pk>' to the ShowProfilePageView. Name this URL show_profile_page.
+
+Test your page! Try this URL pattern: 'http://127.0.0.1:8000/mini_fb/profile/1.
+
+(If you don’t have a Profile with pk of 1, try 2 or 3... Deleted pks are NOT re-used; rather, the counter 
+just keeps incrementing when new objects are created).
+
+You should be able to see a profile page with one profile, displaying in a table. If you have errors, 
+resolve them now before continuing on to the next part.
+
+Edit your show_all_profiles.html file to create links from each user’s name and image to the profile page 
+for that user. Use the data attributes of the model to create a URL pattern similar to 
+'http://127.0.0.1:8000/mini_fb/profile/1, but substituting in the primary key for each profile, i,e., the 
+attribute profile.pk.
+
+Hint: use the syntax for a named URL: "{% url 'name' profile.pk %}", where name is the name you gave for 
+this URL in the urls.py file. We will discuss URLs in class.
+
+Test that this works. Start at this URL pattern: 'http://127.0.0.1:8000/mini_fb/. You should be able to 
+click on the link from any one profile, and it should bring you to the detail page (ShowProfilePageView) 
+for that user.
+
+If you have errors, resolve them now before continuing on to the next part.
+
+Create a template file called base.html. Use this file to create all of the standard HTML tags (<head>, 
+<body>, etc.) and to do any general formatting for colors/fonts.
+
+Create an overall application heading that will appear on each page.
+
+Include a section at the top, similar to in Assignment 15, which has a link to the main URL you have 
+(show_all_profiles); this will allow users to return to the main page.
+
+Create a content block to be filled in by the pages that inherit from base.html.
+
+Edit your other templates (show_all_profiles.html and show_profile_page.html) to inherit from base.html, 
+following the procedure in Assignment 15. Specifically, you will wrap your existing code in the content 
+block scriptlet tags.
+
+Test everything! Start at this URL pattern: 'http://127.0.0.1:8000/mini_fb/. Test that you can click through 
+to a profile page for any profile, and then use the link at the top of the page to return to viewing all 
+profiles.
+
+If you have errors, resolve them now before continuing on to the next part.
+
+Task 2: Modeling and displaying status messages
+Tasks
+
+Continue to do this work within your existing Django project, within the mini_fb application that you 
+started in Assignment 16.
+
+In the models.py file, create a model called StatusMessage, which will model the data attributes of 
+Facebook status message. This StatusMessage model will need to include the following data attributes:
+
+timestamp (the time at which this status message was created/saved)
+message (the text of the status message)
+profile (the foreign key to indicate the relationship to the Profile of the creator of this message)
+The foreign key is how we model a relationship between different kinds of objects. In this case, we are 
+defining the relationship such that every StatusMessage object is related to a single Profile object.
+
+Be sure to create a __str__ method (exactly similar to __repr__) on this class to return a string representation of this object.
+
+Register your model with the Django admin.
+Remember to run the make_migrations and migrate commands at the console.
+Use the Django admin to create 3-5 sample status messages, with any content of your choosing.
+
+In your models.py file, create an accessor method get_status_messages on the Profile class, to obtain 
+status messages for this Profile.
+
+Hint: you can filter StatusMessage objects by their profile (foreign key).
+
+Edit your show_profile_page.html template page, to add the display of status messages. Use a loop to 
+display all status messages.
+
+Note! An earlier version of this assignment page asked you to display the status messages on the 
+show_all_profiles.html template. This was an error. We will however accept either solution for full points.
+
+
+
+
+
+
+
+___________________________________________________________________________________________________
+
+
+In forms.py, Create a class CreateProfileForm which inherits from forms.ModelForm. Be sure to specify the
+inner-class Meta, which relates this form to the Profile model.
+
+specify the list of fields that this form should set (i.e., all of the data attributes of the Profile 
+class).
+
+Note: How Django displays HTML Form Fields
+
+By default, Django will choose which type of HTML form fields to use, based on the types of the fields in 
+your model.
+
+For example, when your form has a model.TextField, Django will use a <textarea> (multi-line text input box).
+Often, this is OK. For this assignment it is fine, and you can get full functionality and points using the 
+defaults.
+
+If you want to customize how the HTML form displays, you can explicitly tell Django which type of form 
+field to use.
+
+For example, you can add these explicit form fields as data attributes in your form CreateProfileForm 
+class:
+
+class CreateProfileForm(forms.ModelForm):
+
+    first_name = forms.CharField(label="First Name", required=True)
+    birth_date = forms.DateField(widget=forms.SelectDateWidget(years=range(2012,1920,-1),),)
+
+    # ...
+See the details in the Django Forms Documentation page.
+
+
+
+views.py CreateProfileView :
+
+Be sure to specify the form this create view should use, i.e., the CreateProfileForm. Also, specify the 
+name of the template to use to render this form, which must be called mini_fb/create_profile_form.html.
+
+Create the template file mini_fb/create_profile_form.html, to render the HTML form. Your form must:
+
+include the <form> and </form> tags
+set the form’s method to POST
+include the django-created csrf_token as a form field (as you did in the example video)
+provide a submit button
+You may use your discretion/imagination about how this template should display the form fields, but you 
+must include labels for each field to show what input is expected. Upon submission, your form will be 
+handled by the generic CreateView class, which will create a new record for this model and store it in 
+the database.
+
+After storing this new record, the generic CreateView will attempt to display it using the Profile models 
+get_absolute_url method – which you must implement.
+
+The get_absolute_url method must return a URL to show this one profile, i.e., the URL pattern will be 
+similar to: 'http://127.0.0.1:8000/mini_fb/profile/1.
+
+Use the reverse function and the named URL pattern to obtain a valid URL to show this profile.
+
+Edit the mini_fb project’s urls.py file. Create a URL mapping to route requests from the URL pattern 
+'create_profile' to the CreateProfileView view. Name this URL create_profile.
+
+Test your page! Try this URL pattern: 'http://127.0.0.1:8000/mini_fb/create_profile.
+
+You should be able to see a form to create a new profile; fill the form and use the submit button; and 
+then upon submission you should be routed to the new profile page. If you have errors, resolve them now 
+before continuing on to the next part.
+
+Edit your template file base.html. Add a link to create a new Profile.
+
+Test everything! Start at this URL pattern: 'http://127.0.0.1:8000/mini_fb/. Test that you can click 
+through to a profile page for any profile, and then use the link at the top of the page to return to 
+viewing all profiles.
+
+If you have errors, resolve them now before continuing on to the next part.
+
+Updating an existing profile
+
+Edit the forms.py. Create a class UpdateProfileForm which inherits from forms.ModelForm.
+
+Be sure to specify the inner-class Meta, which relates this form to the Profile model. Also, specify the 
+list of fields that this form should set (i.e., all of the data attributes of the Profile class, except 
+NOT the user’s first name or last name, which should not be changeable).
+
+Edit the views.py file. Create a class-based view called UpdateProfileView, which inherits from the generic 
+UpdateView class. Be sure to specify the form this create view should use, i.e., the UpdateProfileForm. 
+Also, specify the name of the template to use to render this form, which must be called 
+mini_fb/update_profile_form.html.
+
+Create the template file mini_fb/update_profile_form.html, to render the HTML form. Your form must:
+
+include the <form> and </form> tags
+set the form’s method to POST
+include the django-created csrf_token as a form field (as you did in the example video)
+provide a submit button
+You may use your discretion/imagination about how this template should display the form fields, but you must
+include labels for each field to show what input is expected. Upon submission, your form will be handled by 
+the generic UpdateView class, which will update the Profile record for this model and store it in the 
+database.
+
+Edit the mini_fb project’s urls.py file. Create a URL mapping to route requests from the URL pattern 
+'profile/<int:pk>/update' to the UpdateProfileView view. Name this URL update_profile.
+
+Test your URL! Try this URL pattern: 'http://127.0.0.1:8000/mini_fb/profile/1/update (or a similar URL with 
+a different primary key).
+
+You should see a form to update the profile, and it should be pre-filled with the existing data for this 
+Profile record. Change something in the form, and use the submit button to submit it to the server.
+
+Upon submission you should be routed back to the profile page (i.e., by the get_absolute_url method), on 
+which you should see the update.
+
+If you have errors, resolve them now before continuing on to the next part.
+
+Finally, add an Edit this profile link to the show_profile_page.html template, so that you can click that 
+link and reach the update form.
+
+
+
+Task 2: Posting status messages
+In this part, you will create a form to enable a user to post a status message. The form will display on the profile page, and prompt the user for inputs. For example:
+
+
+
+After the form is submitted, the new status message will be saved into the database, and the server will 
+redisplay the profile page (with the new status message shown).
+
+
+
+
+
+
+
+
+forms.py CreateStatusMessageForm:
+
+Be sure to specify the inner-class Meta in which you specify that this form relates to the StatusMessage 
+model. Also, specify the list of fields that this form should set (i.e., the message of the status 
+message).
+
+Open the views.py file, and add the following get_context_data method into the ShowProfilePageView view 
+class:
+
+def get_context_data(self, **kwargs):
+    '''Return the context data (a dictionary) to be used in the template.'''
+
+    # obtain the default context data (a dictionary) from the superclass; 
+    # this will include the Profile record for this page view
+    context = super(ShowProfilePageView, self).get_context_data(**kwargs)
+    # create a new CreateStatusMessageForm, and add it into the context dictionary
+    form = CreateStatusMessageForm()
+    context['create_status_form'] = form
+    # return this context dictionary
+    return context
+This method will provide the context variables to the template. In particular, we are adding a new variable 
+called create_status_form, which will be used in the template to render/display the CreateStatusForm.
+
+
+
+
+
+Edit the show_profile_page.html template. You will add HTML code to display the CreateStatusMessage form on 
+the profile page. Specifically, the form object will be called create_status_form. Your HTML form must:
+
+include the <form> and </form> tags
+set the form’s method to POST
+include the django-created csrf_token as a form field (as you did in the example video)
+provide a submit button
+You will need to provide the form action, but we will come back to that in a few steps.
+Edit the file views.py to add a view to process the form submission. In this case, using the generic 
+CreateView is a little challenging: the StatusMessage requires a foreign key to relate it to a Profile 
+object. While it is possible to do this with a generic view, but it is a bit simpler to just write a custom 
+view function.
+
+This custom view function is provided as a learning opportunity. Please read the code and comments closely, 
+and ask questions. There will be more custom view functions in your future!
+
+
+
+
+Add the following function defition in the views.py file:
+
+def create_status_message(request, pk):
+    '''Process a form submission to post a new status message.'''
+    # find the profile that matches the `pk` in the URL
+    profile = Profile.objects.get(pk=pk)
+
+    # if and only if we are processing a POST request, try to read the data
+    if request.method == 'POST':
+
+        # read the data from this form submission
+        message = request.POST['message']
+
+        # save the new status message object to the database
+        if message:
+
+            sm = StatusMessage()
+            sm.profile = profile
+            sm.message = message
+            sm.save()
+
+    # redirect the user to the show_profile_page view
+    return redirect(reverse('show_profile_page', kwargs={'pk': pk}))
+Edit the mini_fb project’s urls.py file. Create a URL mapping to route requests from the URL pattern 
+'profile/<int:pk>/post_status' to the create_status_message view function. Name this URL post_status.
+
+
+
+
+
+Set the form action! Since we are using a form within the show_profile_page.html template (as opposed to 
+a stand-alone template, as we did with the create profile), we need to set the form action to indicate to 
+where the form should be submitted. It should be submitted to the URL pattern 
+'/mini_fb/profile/<int:pk>/post_status', i.e., to the custom view function called create_status_message.
+
+This URL includes the primary key of the Profile to which this StatusMessage is related, which is used in 
+the create_status_message function (go back and read it to see how that works).
+
+Testing!! Start at your main /mini_fb URL, and pick any existing profile. You should see the profile page, 
+with a form to post a status message. Write something witty in the form, and use the submit button to submit 
+it to the server.
+
+Upon submission you should be routed back to the profile page (by the get_absolute_url method), on 
+which you should see the update.
+

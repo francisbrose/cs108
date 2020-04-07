@@ -7,3 +7,4 @@ from .models import Quote, Person, Image
 admin.site.register(Quote)
 admin.site.register(Person)
 admin.site.register(Image)
+#admin.site.register(Profile)
