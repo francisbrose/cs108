@@ -18,8 +18,6 @@
     {% enfor %}
 </ul>
 
-{% endblock %}
-
 <h2>Upload an Image of {{person.name}}</h2>
 
 <form method='POST' enctype="multipart/form-data" 
@@ -28,3 +26,6 @@
     {{add_image_form.as_p }}
     <input type="submit" value="upload">
 </form>
+
+
+{% endblock %}

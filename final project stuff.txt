@@ -1,0 +1,12 @@
+final project stuff
+
+Note: Django will choose type of HTML form fields to use, based on types of model fields.
+    example: when form has a model.TextField, Django will use a <textarea> (multi-line text input box).
+    Often, this is OK. For this assignment it is fine.
+    you can customize how HTML form displays, tell Django type of form 
+    field to use.
+    For example, you can add these form fields as data attributes in form CreateProfileForm :
+    class CreateProfileForm(forms.ModelForm):
+        first_name = forms.CharField(label="First Name", required=True)
+        birth_date = forms.DateField(widget=forms.SelectDateWidget(years=range(2012,1920,-1),),)
+See details in Django Forms Documentation page.

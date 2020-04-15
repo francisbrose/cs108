@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'hello_world.apps.HelloWorldConfig', 
     'pages.apps.PagesConfig', 
     'quotes',
+    'mini_fb',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +61,7 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            'string_if_invalid' : 'DEBUG WARNING: undefined template variable [%s] not found',
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -121,3 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_URL = "/media/"

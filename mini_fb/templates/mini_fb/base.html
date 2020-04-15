@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>BaceFook</title>
+    </head>
+    <body>
+        <div align="center">
+        <header style="color:lightblue">
+            <a href="{% url 'show_all_profiles' %}">Show All Profiles</a> |
+            <a href="{% url 'create_profile_form' %}">Create a new Profile</a>
+        </header>
+        <h1 style="color:steelblue">BaceFook</h1></div>
+    {% block content %}
+    {% endblock %}
+    </body>
+</html>

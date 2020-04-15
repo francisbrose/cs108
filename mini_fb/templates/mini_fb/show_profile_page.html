@@ -1,0 +1,62 @@
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<div align="center">
+<a href="{% url 'update_profile' profile.pk %}">Update this Profile</a> | <a href="{% url 'add_friend' profile_pk=profile.pk friend_pk=profile.pk %}">Add Friends | <a href="{% url 'show_news_feed' profile.pk %}">News Feed</a>
+<br>
+<hr>
+<div align="center">
+<h2 style="color:steelblue">{{profile.f_name}} {{profile.l_name}}</h2>
+<img src="{{profile.image}}" style="max-width: 400;">  
+
+<table>
+        <colgroup>
+            <col span="1" style="width:25%">
+            <col span="1" style="width:25%">
+            <col span="1" style="width:25%">
+        </colgroup>
+<th><H3 style="color:steelblue"><b>About:</b></H3></th>   
+<th><H3 style="color:steelblue"><b>Friends:</b></H3></th>
+<th><H3 style="color:steelblue"><b>Post a Status:</b></H3></th>
+<th><H3 style="color:steelblue"><b>Status Messages:</b></H3></th>
+<tr>
+<td>
+    <li>{{profile.email}}</li>    
+    <!-- <li>{{profile.bday}}</li> -->
+    <li>{{profile.city}}</li>
+</td>
+<td>
+    {% if profile.get_friends %}
+        {% for friends in profile.get_friends %}
+            <a href="{% url 'show_profile_page' friends.pk %}">
+            <img src="{{friends.image}}" style='width:100;'>
+            {{friends.f_name}} {{friends.l_name}}</a>
+        {% endfor %}
+    {% else %}
+        <li>{{profile.f_name}} doesn't have any friends. LOL!</li>
+    {% endif %}
+</td>
+<td>    
+    <form method='POST' action='{% url "post_status" profile.pk %}' enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {% for field in create_status_message %}
+                {{field.name}}
+                {{field}}
+            {% endfor %}
+            <textarea rows=5 cols=30></textarea>
+            <input type="file" name='Add Image' accept='image/*' id='id_image'>
+            <input type='sumbit' name='Post Message!' value='Post message'>
+    </form>
+</td>
+<td><td>
+    {% for message in profile.get_status_messages %}
+        {% if statusmessage.image %}
+            <img src="statusmessage.image.url" style='max-width: 200;'>
+        {% endif %}
+            {{statusmessage.message}} <small><i><a href="{% url 'delete_status_message' profile_pk=profile.pk status_pk=message.pk %}">Delete Status?</a></small></i></li>
+        <br>
+    {% endfor %}
+</td></td>
+</tr>
+</table>
+{% endblock %}

@@ -9,11 +9,11 @@ class Person(models.Model):
     def __str__(self):
         '''Returns str of this person'''
         return self.name
-    def get_random_image(self):
-        '''Return random image of this person'''
-        images = Image.objects.filter(person=self.pk)
-        i - random.randint(0, len(images) -1)
-        return images(i)
+    # def get_random_image(self):
+    #     '''Return random image of this person'''
+    #     images = Image.objects.filter(person=self.pk)
+    #     i = random.randint(0, len(images) -1)
+    #     return images(i)
     def get_all_images(self):
         '''returns all images of a person'''
         images = Image.objects.filter(person=self.pk)
@@ -41,40 +41,12 @@ class Quote(models.Model):
 class Image(models.Model):
     '''Represent an image associated with a person.'''
     image_url = models.URLField(blank=True)
-    image_file = models.ImageField(blank=True)
+    #image_file = models.ImageField(blank=True)
     person = models.ForeignKey('Person', on_delete=models.CASCADE)
     def __str__(self):
         '''Return a string representation of this image.'''
+        return self.image_url
         if self.image_url:
             return self.image_url
         else:
             return self.image_file.url
-
-
-class Profile(models.Model):
-    '''Models the data attributes of Facebook users'''
-    name=models.TextField(blank=False)
-    def f_name(self):
-        '''Returns first name'''
-        return self.f_name
-
-    def l_name(self):
-        '''Returns last name'''
-        return self.l_name
-
-    def city(self):
-        '''Returns person's city'''
-        return self.city
-
-    def email(self):
-        '''Returns person's email'''
-        return self.email
-
-    def image(self):
-        '''Returns image of person'''
-        image = Image.objects.filter(person=self.pk)
-        return image
-        
-    def __str__(self):
-        '''Return a string representation of this profile.'''
-        return self.Profile

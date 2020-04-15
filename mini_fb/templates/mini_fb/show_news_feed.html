@@ -1,0 +1,23 @@
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+
+<a href="{% url 'show_profile_page' profile.pk %}">Return to {{profile.f_name}}'s Profile Page</a>
+
+<table>
+    <colgroup>
+        <col span="1" style="width:8%;">
+        <col span="1" style="width:8%;">
+        <col span="1" style="width:8%;">
+    </colgroup>
+    <h2>{{profile.f_name}}'s News Feed</h2>
+
+    {% for  %}
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
