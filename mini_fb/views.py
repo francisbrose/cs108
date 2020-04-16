@@ -26,7 +26,8 @@ class ShowProfilePageView(DetailView):
 class CreateProfileView(CreateView):
     '''Creates a new profile to save to the database.'''
     form_class = CreateProfileForm
-    template_name = "mini_fb/create_profile.html"
+    template_name = 'mini_fb/create_profile.html'
+    context_object_name = 'create_profile_view'
 
 def create_status_message(request, pk):
     '''Process a form submission to post a new status message.'''
@@ -48,8 +49,9 @@ def create_status_message(request, pk):
 class UpdateProfileView(UpdateView):
     '''Updates a profile to the database.'''
     form_class = UpdateProfileForm
-    template_name = 'mini_fb/update_profile_form.html'
+    template_name = 'mini_fb/update_profile.html'
     context_object_name = 'update_profile'
+    queryset=Profile.objects.all()
 
 class ShowNewsFeedView(DetailView):
     '''Shows the news feed'''
@@ -59,8 +61,8 @@ class ShowNewsFeedView(DetailView):
     queryset=Profile.objects.all()
     def get_object(self):
         '''Gets news feed objects to display.'''
-        profile_pk=self.kwargs['profile.pk']
-        newsfeed=StatusMessage.objects.get(pk=profile_pk)
+        profile_pk=self.kwargs.get('profile_pk')
+        newsfeed=Profile.objects.get(pk=profile_pk)
         return newsfeed
 
 class DeleteStatusMessageView(DeleteView):
@@ -69,7 +71,7 @@ class DeleteStatusMessageView(DeleteView):
     queryset=Profile.objects.all()
     def get_object(self):
         '''Gets status to be deleted.'''
-        status_pk=self.kwargs['status.pk']
+        status_pk=self.kwargs['message.pk']
         profile_pk=self.kwargs['profile.pk']
         message=StatusMessage.objects.get(pk=status_pk)
         return message
@@ -89,7 +91,6 @@ class ShowPossibleFriendsView(DetailView):
     '''Shows all possible friends for a given profile.'''
     model=Profile
     template_name = 'mini_fb/show_possible_friends.html'
-    context_object_name='add_friend'
 
 def add_friend(request, profile_pk, friend_pk):
     '''Processes an add_friend request and adds friend to profile.'''

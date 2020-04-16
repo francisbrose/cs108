@@ -10,18 +10,16 @@
 
 <table>
         <colgroup>
-            <col span="1" style="width:25%">
-            <col span="1" style="width:25%">
-            <col span="1" style="width:25%">
+            <col span="1" style="width:20%">
+            <col span="1" style="width:20%">
+            <col span="1" style="width:20%">
         </colgroup>
 <th><H3 style="color:steelblue"><b>About:</b></H3></th>   
 <th><H3 style="color:steelblue"><b>Friends:</b></H3></th>
-<th><H3 style="color:steelblue"><b>Post a Status:</b></H3></th>
 <th><H3 style="color:steelblue"><b>Status Messages:</b></H3></th>
 <tr>
 <td>
     <li>{{profile.email}}</li>    
-    <!-- <li>{{profile.bday}}</li> -->
     <li>{{profile.city}}</li>
 </td>
 <td>
@@ -45,18 +43,20 @@
             {% endfor %}
             <textarea rows=5 cols=30></textarea>
             <input type="file" name='Add Image' accept='image/*' id='id_image'>
-            <input type='sumbit' name='Post Message!' value='Post message'>
+            <input type='sumbit' name='Post Message!' value='submit'>
     </form>
 </td>
-<td><td>
+<br>
+<br>
+<td>
     {% for message in profile.get_status_messages %}
-        {% if statusmessage.image %}
+        {% if message.image %}
             <img src="statusmessage.image.url" style='max-width: 200;'>
         {% endif %}
-            {{statusmessage.message}} <small><i><a href="{% url 'delete_status_message' profile_pk=profile.pk status_pk=message.pk %}">Delete Status?</a></small></i></li>
+            {{message}} <small><i><a href="{% url 'delete_status_message' profile_pk=profile.pk status_pk=message.pk %}">Delete Status?</a></small></i></li>
         <br>
     {% endfor %}
-</td></td>
+</td>
 </tr>
 </table>
 {% endblock %}

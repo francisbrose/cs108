@@ -5,24 +5,21 @@
 
 <table>
     <colgroup>
-        <col span="1" style="width:8%">
-        <col span="1" style="width:8%">
-        <col span="1" style="width:8%">
+        <col span="1" style="width:500">
+        <col span="1" style="width:500">
+        <col span="1" style="width:500">
     </colgroup>
 <tr>
     <th>Profile Picture</th>        
     <th>Full Name</th>
     <th>Town</th>
 </tr>    
-
 <ul>
-{% for profile in profile %}
-<tr>
-    <a href="{% url 'show_profile_page' profile.pk %}">
-        <td><img src="{{profile.image.pk}}" style="max-width: 200;"></td>
-        <td>{{profile.f_name.pk}} {{profile.l_name.pk}}</td>
-    </a>
-        <td>From {{profile.city.pk}}</td>
+{% for profile in show_all_profiles %}
+<tr align="center">
+    <td><a href="{% url 'show_profile_page' profile.pk %}"><img src="{{profile.image}}" style="max-width: 200;"></td></a>
+    <td><a href="{% url 'show_profile_page' profile.pk %}">{{profile.f_name}} {{profile.l_name}}</td></a>
+        <td>From {{profile.city}}</td>
 </tr>
 {% endfor %}
 

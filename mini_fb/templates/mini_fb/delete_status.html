@@ -3,16 +3,15 @@
 
 <h2>Would you like to delete this status?</h2>
 
+{{message}}
+<img src='{{image}}' style='max-width: 500;'>
 
-{{statusmessage.message}}
-<img src='{{statusmessage.image.url}}' style='max-width: 500;'>
-
-<form method="POST">
+<form method="POST" action="{% url 'show_profile_page' pk %}">
     {% csrf_token %}
     <input type="submit" name="Yes" value="Yes">
 </form>
 
-<form method="GET" action="{% url 'show_profile_page' statusmessage.profile.pk %}">
+<form method="GET" action="{% url 'show_profile_page' pk %}">
     {% csrf_token %}
     <input type="submit" name="No" value="No">
 </form>

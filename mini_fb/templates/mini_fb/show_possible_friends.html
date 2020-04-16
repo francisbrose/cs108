@@ -1,8 +1,6 @@
 {% extends 'mini_fb/base.html' %}
 {% block content %}
 
-<a href="{% url 'show_profile_page' profile.pk %}">Return to {{profile.f_name}}'s Profile Page</a>
-<br>
 {% csrf_token %}
 <table>
     <colgroup>
@@ -10,14 +8,14 @@
         <col span="1" style="width:8%;">
         <col span="1" style="width:8%;">
     </colgroup>
-    <h2>{{profile.f_name}}'s Possible Friends</h2>
+    <h2>{{profile.f_name.pk}}'s Possible Friends</h2>
 
     {% for possible_friends in profile.get_friend_suggestions %}
     <tr>
-        <td><img src="{{possible_friend.profile.image}}"></td>
+        <td><img src="{{possible_friend.image}}"></td>
         <td>{{possible_friend.name}}</td>
         <td>
-            <form method='POST' action='{% url "add_friend" profile_pk=profile.pk friend_pk=possible_friend.pk %}' enctype='multipart/form-data'>
+            <form method='POST' action='{% url "add_friend" profile.pk friend.pk %}'>
                 {% csrf_token %}
                 <input type='submit' value="add friend" name='Add Friend!'>
             </form>

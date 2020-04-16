@@ -1,0 +1,33 @@
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+
+<h3 style="color: steelblue">Creating a New Profile</h3>
+
+<table>
+    <tr>
+        <td>First Name: <input type="text" name="first_name" required id="f__name"></td>
+    </tr>
+    <tr>
+        <td>Last Name: <input type="text" name="last_name" required id="l__name"></td>
+    </tr>
+    <tr>
+        <td>City: <input type="text" name="city" required id="city"></td>
+    </tr>
+    <tr>
+        <td>Email: <input type="text" name="email" required id="email"></td>
+
+    </tr>
+    <tr>
+        <td>Profile Image: <input type="text" name="image" required id="image"></td>
+    </tr>
+<tr>
+    <td><form methods='POST'>
+    {% csrf_token %}
+    <input type='submit' name="Create Profile" value="Create Profile"></td>
+</tr>
+</form>
+</table>
+
+
+
+{% endblock %}
