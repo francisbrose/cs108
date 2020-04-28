@@ -1,19 +1,22 @@
 {% extends 'project/base.html' %}
 {% block content %}
 
-<div align="center"><h2 style="color:salmon">Checkout {{specimen.pk}}</h2>
+<div align="center"><h2 style="color:salmon">Checkout</h2>
 <br>
 
+<a href="{% url 'user' %}">Create a new user here if you are not already registered.</a> 
+<br>
 <form method="POST">
-    {%csrf_token%}
-    {%for field in individualform%}
-        {{form.as_p}}
-    <input type="submit" value="Submit">
-</form>
-
-<form method="POST">
-    {%csrf_token%}
-    {%for field in checkoutform%}
-        {{form.as_p}}
+    <table>
+        {% csrf_token %}
+            {% for fields in form %}
+            <td>
+                {{fields.name}} <br>
+                {{fields}}
+            </td>
+            {% endfor %}
+        </table>
     <input type="submit" value="Update">
 </form>
+</div>
+{% endblock %}

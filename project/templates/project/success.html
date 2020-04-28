@@ -22,16 +22,17 @@ Alternately, you can delete the reservation at any time if you no longer need th
     <th>Image</th>
     <th>Checkout Date</th>
     <th>Checkin Date</th>
-    <th>Edit/Delete Reservation</th>
+    <th>Delete Reservation</th>
 </tr>
-{% for specimen in specimen.all %}
-    <td>{{specimen.c_name}}</td>
-    <td><img src="{%static specimen.image%}" alt="{{specimen.c_name}}" style="max-width: 400;"></td>
+<div align="center">
+{% for check in check_list %}
+    <td>{{check.specimen.c_name}}</td>
+    <td><img src="{% static check.specimen.image %}" alt="{{check.specimen.c_name}}" style="max-width: 300;"></td>
     <td>{{check.checkout}}</td>
     <td>{{check.checkin}}</td>
-    <td><a href="{% url 'checkout' check.pk %}">Edit</a> or <a href="{% url 'delete' check.pk}">Delete</a></td>
+    <td><a href="{% url 'delete' check.pk %}">Delete Reservation</a></td>
 
 {% endfor %}
-
+</div>
 </table>
 {% endblock %}

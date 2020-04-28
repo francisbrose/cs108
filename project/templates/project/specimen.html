@@ -11,19 +11,19 @@ potential uses, link to checkout form, and whether or not specimen is checked ou
 
 <h3>Checkout this {{specimen.c_name}} {{specimen.category}}?</h3>
 Specimen is 
-{% if check.pk == true %}
-    available. <a href="{% url 'checkout' specimen.pk %}">Click here to check out.</a>
-{% else %}
+{% if specimen.is_taken %}    
     not available.    
+{% else %}
+    available. <a href="{% url 'checkout' specimen.pk %}">Click here to check out.</a>
 {% endif %}
 
 
-<h3 style="color:salmon">Taxonomic Catagorization:</h3>
-<li style="color:salmon"><b>Kingdom:</b> {{specimen.kingdom}}</li>
-<li style="color:salmon"><b>Phylum:</b> {{specimen.phylum}}</li>
-<li style="color:salmon"><b>Class:</b> {{specimen.classs}}</li>
-<li style="color:salmon"><b>Order:</b> {{specimen.order}}</li>
-<li style="color:salmon"><b>Family:</b> {{specimen.family}}</li>
-<li style="color:salmon"><b>Genus:</b> {{specimen.genus}}</li>
-<li style="color:salmon"><b>Species:</b> {{specimen.species}}</li></div>
+<h3>Taxonomic Catagorization:</h3>
+<li><b>Kingdom:</b> {{specimen.kingdom}}</li>
+<li><b>Phylum:</b> {{specimen.phylum}}</li>
+<li><b>Class:</b> {{specimen.classs}}</li>
+<li><b>Order:</b> {{specimen.order}}</li>
+<li><b>Family:</b> {{specimen.family}}</li>
+<li><b>Genus:</b> {{specimen.genus}}</li>
+<li><b>Species:</b> {{specimen.species}}</li></div>
 {% endblock %}

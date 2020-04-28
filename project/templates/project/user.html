@@ -1,0 +1,18 @@
+{% extends 'project/base.html' %}
+{% block content %}
+
+<div align="center"><h2 style="color:salmon">New User</h2>
+
+<form method="POST">
+    <table>
+    {% csrf_token %}
+        {% for fields in form %}
+        <td>
+            {{fields.name}} <br>
+            {{fields}}
+        </td>
+        {% endfor %}
+    </table>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

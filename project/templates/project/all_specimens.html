@@ -25,10 +25,10 @@
     <td><a href="{% url 'specimen' specimen.pk %}">{{specimen.category}}</td></a>
     <td><a href="{% url 'specimen' specimen.pk %}"><img src="{%static specimen.image%}" alt="{{specimen.c_name}}" style="max-width: 200;"></td></a>
     <td>Specimen is 
-        {% if check.pk == true %}
-            available.
-        {% else %}
+        {% if specimen.is_taken %}    
             not available.    
+        {% else %}
+            available.</a>
         {% endif %}</td>
 </tr>
 {% endfor %}

@@ -5,10 +5,12 @@ class CheckoutForm(forms.ModelForm):
     '''Form to checkout specimens in the database.'''
     context_object_name='checkout_form'
     class Meta:
-        fields = ['Specimen', 'Individual', 'Checkin', 'Checkout']
+        model=Check
+        fields = ['specimen', 'individual', 'checkin', 'checkout']
 
 class IndividualForm(forms.ModelForm):
     '''Form to add new individual to the database.'''
     context_object_name='individual_form'
     class Meta:
-        fields = ['Name', 'Email', 'Department']
+        model=Individual
+        fields = ['name', 'email', 'department']
