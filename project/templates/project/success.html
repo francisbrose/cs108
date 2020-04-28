@@ -1,0 +1,37 @@
+{% extends 'project/base.html' %}
+{% load static %}
+{% block content %}
+
+<div align="center"><h2 style="color:salmon">Checkout Success and Information</h2>
+<i style="color:salmon">After returning the specimen, please delete it to indicate that your reservation has terminated. 
+<br>
+Alternately, you can delete the reservation at any time if you no longer need the specimen.</i></div>
+
+<!--make a list of all reservations with both edit and delete buttons-->
+<br>
+<table border=.5>
+    <colgroup>
+        <col span="1" style="width:400">
+        <col span="1" style="width:400">
+        <col span="1" style="width:400">
+        <col span="1" style="width:400">
+        <col span="1" style="width:400">
+    </colgroup>
+<tr>
+    <th>Common Name</th>        
+    <th>Image</th>
+    <th>Checkout Date</th>
+    <th>Checkin Date</th>
+    <th>Edit/Delete Reservation</th>
+</tr>
+{% for specimen in specimen.all %}
+    <td>{{specimen.c_name}}</td>
+    <td><img src="{%static specimen.image%}" alt="{{specimen.c_name}}" style="max-width: 400;"></td>
+    <td>{{check.checkout}}</td>
+    <td>{{check.checkin}}</td>
+    <td><a href="{% url 'checkout' check.pk %}">Edit</a> or <a href="{% url 'delete' check.pk}">Delete</a></td>
+
+{% endfor %}
+
+</table>
+{% endblock %}

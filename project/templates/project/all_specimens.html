@@ -1,0 +1,39 @@
+<!-- list of all specimens. incl. common name, type of specimen, image, checkout status (y/n)-->
+{% extends 'project/base.html' %}
+{% load static %}
+{% block content %}
+
+<div align="center"><h2 style="color:salmon">All Specimens</h2></div>
+
+<table border=.5>
+    <colgroup>
+        <col span="1" style="width:500">
+        <col span="1" style="width:500">
+        <col span="1" style="width:500">
+        <col span="1" style="width:500">
+    </colgroup>
+<tr>
+    <th>Common Name</th>        
+    <th>Type</th>
+    <th>Image</th>
+    <th>Checkout Status</th>
+</tr>    
+<ul>
+{% for specimen in all_specimens %}
+<tr align="center">
+    <td><a href="{% url 'specimen' specimen.pk %}">{{specimen.c_name}}</td></a>
+    <td><a href="{% url 'specimen' specimen.pk %}">{{specimen.category}}</td></a>
+    <td><a href="{% url 'specimen' specimen.pk %}"><img src="{%static specimen.image%}" alt="{{specimen.c_name}}" style="max-width: 200;"></td></a>
+    <td>Specimen is 
+        {% if check.pk == true %}
+            available.
+        {% else %}
+            not available.    
+        {% endif %}</td>
+</tr>
+{% endfor %}
+
+</table>
+</div>
+{% endblock %}
+</ul>

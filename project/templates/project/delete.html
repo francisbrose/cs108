@@ -1,0 +1,19 @@
+{% extends 'project/base.html' %}
+{% block content %}
+
+<h2>Would you like to delete this reservation?</h2>
+
+{{check.pk}}
+<img src="{%static specimen.image%}" alt="{{specimen.c_name}}" style="max-width: 400;">
+
+<form method="POST" action="{% url 'success' pk %}">
+    {% csrf_token %}
+    <input type="submit" name="Yes" value="Yes">
+</form>
+
+<form method="GET" action="{% url 'success' pk %}">
+    {% csrf_token %}
+    <input type="submit" name="No" value="No">
+</form>
+
+{% endblock %}

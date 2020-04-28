@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Individuals, Specimens, Checkout
-admin.site.register(Specimens),
-admin.site.register(Check),
-admin.site.register(Individuals),
+from .models import Specimen, Individual, Check
+admin.site.register(Specimen)
+admin.site.register(Individual)
+admin.site.register(Check)

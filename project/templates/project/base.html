@@ -1,0 +1,27 @@
+<html>
+    <body style="background-color:whitesmoke;">
+    <font face = "candara">
+    <head>
+        <title>Biology Museum Inventory</title>
+    </head>
+    <body>
+        <div align="center">
+        <header style="color:salmon">
+            <a href="{% url 'home' %}">Home</a> |
+            <a href="{% url 'about' %}">About</a> |
+            <a href="{% url 'check' %}">Checkout a Specimen</a> |
+            <a href="{% url 'all_specimens' %}">All Specimens</a>
+            
+        </header>
+        <h1 style="color:salmon">Biology Museum Inventory</h1></div>
+    {% block content %}
+    {% endblock %}
+    </body>
+<br>
+<br>
+<br>
+<br>
+<small><small>Created by Francis Rose.</small></small>
+</html>
+
+<hr>

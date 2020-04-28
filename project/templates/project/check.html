@@ -1,0 +1,14 @@
+<!-- checkout form (w/ name, department, dates to be checked in and out, and send 
+email confirmation?). also delete a registration, so list all registrations at bottom -->
+
+{% extends 'project/base.html' %}
+{% block content %}
+
+<div align="center"><h2 style="color:salmon">Checkout a Specimen</h2>
+<i style="color:salmon">Intended for professors to use as a teaching supplement.</i>
+
+<h3 style="color:salmon">To checkout any specimen, please select one from the listings under "All Specimens" and click on its information<br> to be routed to its page. From there, you will find a link to checkout that specific specimen.</h3>
+
+<a href="{% url 'success' %}">Click here</a> to either cancel or mark a reservation as complete.</div>
+
+{% endblock %}

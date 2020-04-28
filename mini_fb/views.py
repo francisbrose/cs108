@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic import *
 from .models import *
-from .forms import CreateStatusMessageForm, CreateProfileForm, UpdateProfileForm
+from .forms import *
 
 class ShowAllProfilesView(ListView):
     '''Shows all profiles.'''
