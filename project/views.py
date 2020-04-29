@@ -14,6 +14,7 @@ class CheckView(ListView):
     model=Check
     template_name='project/check.html'
     queryset=Specimen.objects.all()
+    success_url='/'
 
 class AllSpecimensView(ListView):
     '''Displays all specimens.'''
@@ -37,7 +38,9 @@ class DeleteCheckView(DeleteView):
     '''Deletes a reservation.'''
     template_name='project/delete.html'
     model = Check 
-    success_url ="/"
+    success_url='/'
+
+
 
 class SuccessView(ListView):
     '''Displays page aftrer successful checkout.'''
@@ -58,6 +61,5 @@ def CheckoutView(request,pk):
     form=CheckoutForm(request.POST)
     if form.is_valid():
         form.save()
-        
     #context["form"]=form
     return render(request, "project/checkout.html", {'form': form})

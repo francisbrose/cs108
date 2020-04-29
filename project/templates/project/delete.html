@@ -1,12 +1,13 @@
 {% extends 'project/base.html' %}
+{% load static %}
 {% block content %}
 
 <h2>Would you like to delete this reservation?</h2>
 
-{{check.specimen}}
-<img src="{%static check.specimen.image%}" alt="{{check.specimen.c_name}}" style="max-width: 400;">
+<h4>{{check.specimen}}</h4><br>
+<img src="{% static check.specimen.image %}" alt="{{check.specimen.c_name}}" style="max-width: 400;">
 
-<form method="POST" action="{% url 'success' pk %}">
+<form method="POST">
     {% csrf_token %}
     <input type="submit" value="Confirm">
 </form>
